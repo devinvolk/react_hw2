@@ -9,30 +9,25 @@ export default class List extends Component {
   }
 
   addItem = (event) => {
-    event.preventDefault();
+    event.preventDefault()
     const addedItem = {id: Date.now(), name: event.target.item.value}
     this.setState((prevState) => prevState.list.push(addedItem))
     console.log(this.state.list)
-    // const listGroup = document.querySelector('.list-group')
-    // let items = ``
-    // for (index in this.state){
-    //     items += `<li className="list-group-item" id="${index}">${this.state[index]}<button onClick=${this.deleteItem} className="btn btn-danger">Delete</button></li>`
-    // }
-    // listGroup.innerHTML = items
   }
 
   displayList = (item) => {
-    return <li className="list-group-item" key={item.id}>{item.name}<button onClick={this.deleteItem(item.id)} className="btn btn-danger">Delete</button></li>
+    return <li className="list-group-item" key={item.id}>{item.name}<button onClick={this.deleteItem.bind(this, item.id)} className="btn btn-danger">Delete</button></li>
   }
 
   deleteItem = (id) => {
-    // let remainingItems = this.state.list.filter((item) => item.id !== id)
-    // this.setState({list: remainingItems})
+    let remainingItems = this.state.list.filter((item) => item.id !== id)
+    this.setState({list: remainingItems})
   }
 
   render() {
     return (
-      <div>
+      <div className="container">
+        <h1>Shopping List</h1>
         <form onSubmit={this.addItem}>
           <div className="mb-3">
             <input
